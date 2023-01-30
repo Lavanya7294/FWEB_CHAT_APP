@@ -10,7 +10,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 # socketio = SocketIO(app, manage_session=False)
-socketio = SocketIO(app, async_mode='gevent_uwsgi')
+socketio = SocketIO(app, async_mode='eventlet')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -55,4 +55,4 @@ def left(message):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app)
