@@ -9,8 +9,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 Session(app)
 
-# socketio = SocketIO(app, manage_session=False)
-socketio = SocketIO(app, async_mode='eventlet')
+socketio = SocketIO(app, manage_session=False,async_mode=None)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -55,4 +54,4 @@ def left(message):
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    app.run(debug=True)
