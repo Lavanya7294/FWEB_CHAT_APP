@@ -36,13 +36,13 @@ def chat():
 def join(message):
     room = session.get('room')
     join_room(room)
-    emit('status', {'msg':  session.get('username') + ' has entered the room.'}, room=room)
+    emit('status', {'msg':  session.get('username') + ' has entered the room.'}, room=room, broadcast=True)
 
 
 @socketio.on('text', namespace='/chat')
 def text(message):
     room = session.get('room')
-    emit('message', {'msg': session.get('username') + ' : ' + message['msg']}, room=room)
+    emit('message', {'msg': session.get('username') + ' : ' + message['msg']}, room=room, broadcast=True)
 
 
 @socketio.on('left', namespace='/chat')
@@ -51,7 +51,7 @@ def left(message):
     username = session.get('username')
     leave_room(room)
     session.clear()
-    emit('status', {'msg': username + ' has left the room.'}, room=room)
+    emit('status', {'msg': username + ' has left the room.'}, room=room, broadcast=True)
 
 
 if __name__ == '__main__':
