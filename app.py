@@ -54,4 +54,4 @@ def left(message):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, use_reloader=False, debug=True, log_output=True)
